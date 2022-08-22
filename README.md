@@ -6,16 +6,19 @@ This version was made in Python using pygame library.
 
 ### Rules
 - Any live cell with two or three live neighbours survives.
-
 - Any dead cell with three live neighbours becomes a live cell.
-
 - All other live cells die in the next generation. Similarly, all other dead cells stay dead.
 
 
 ### How to Play
-Initially, you'll get a canvas of all dead cells. You can "paint" live cells tp the canvas.
-You have 4 buttons at your disposal.
-- Green button will make it play the simulation.
+To play, first install dependencies however you like. Then simply run game.py via terminal:
+```
+python game.py
+```
+
+Initially, you'll get a canvas of all dead cells. You can "paint" live cells to the canvas.
+You have four buttons at your disposal.
+- Green button will play the simulation.
 - Orange button will pause the simulation.
 - Red button will stop the simulation and clear the board.
 - Blue button will increment the simulation by a single step.
