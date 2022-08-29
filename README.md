@@ -23,7 +23,4 @@ You have four buttons at your disposal.
 - Red button will stop the simulation and clear the board.
 - Blue button will increment the simulation by a single step.
 
-
-### TODO
-- Add text / images to buttons
-- Add a slider for playback speed
+There is a slider on the bottom right for fps adjustment. You can click on any place in it to change the speed of the game accordingly.
