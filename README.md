@@ -4,6 +4,9 @@ Game of Life is a cell-based automaton game devised by John Horton Conway.
 
 This version was made in Python using pygame library.
 
+*As of the latest push, I stopped working on this project.*
+
+
 ### Rules
 - Any live cell with two or three live neighbours survives.
 - Any dead cell with three live neighbours becomes a live cell.
