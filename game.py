@@ -2,14 +2,12 @@ import pygame
 import math
 from Board import Board
 
-# TODO
-# Add slider for frame rate
-# Add text names to button
 
 # Set up the game state
 pygame.init()
 clock = pygame.time.Clock()
 state = 'init'  # One of 'init', 'play' 'increment'
+MAX_FPS = 60
 
 # Set up the drawing window
 display_size = (720, 720)
@@ -36,6 +34,11 @@ play_button = pygame.Rect((10, 670), (60, 40))
 pause_button = pygame.Rect((80, 670), (60, 40))
 stop_button = pygame.Rect((150, 670), (60, 40))
 step_button = pygame.Rect((220, 670), (60, 40))
+
+# Initialize the slider
+fps_slider_max_size = 240
+fps_slider = pygame.Rect((470, 670), (10, 40))
+fps_boundary = pygame.Rect((470, 670), (fps_slider_max_size, 40))
 
 # Run until the user asks to quit
 running = True
@@ -74,9 +77,13 @@ while running:
             elif event.button == 1 and state == 'play' and pause_button.collidepoint(event.pos):
                 state = 'increment'
 
+            # Adjusting slider size
+            if fps_boundary.collidepoint(event.pos):
+                fps_slider.width = event.pos[0] - fps_slider.x
+
     # If in play mode, calculate next step
     if state == 'play':
-        clock.tick(5)  # Now your game will be capped at 5 fps
+        clock.tick(MAX_FPS * fps_slider.width / fps_slider_max_size)
         board.calculate_next_state()
     else:
         clock.tick(60)
@@ -92,10 +99,16 @@ while running:
                              rect,
                              border_radius=int(cell_size * 0.1))
 
+    # Draw the 4 buttons
     pygame.draw.rect(screen, [0, 255, 0], play_button)
     pygame.draw.rect(screen, [255, 255, 0], pause_button)
     pygame.draw.rect(screen, [255, 0, 0], stop_button)
     pygame.draw.rect(screen, [0, 140, 255], step_button)
+
+    # Draw the fps slider
+    pygame.draw.rect(screen, [0, 0, 0], fps_boundary)
+    pygame.draw.rect(screen, [math.floor(255 * fps_slider.width / fps_slider_max_size),
+                              255 - math.floor(255 * fps_slider.width / fps_slider_max_size), 0], fps_slider)
 
     # This updates the display
     pygame.display.flip()
